@@ -2,7 +2,7 @@ const MODELS_SCHEMA = [
   {
     name: "Male Figure",
     description:
-      "Low poly smoothed male figure, designed with blender and smothed with zbrush. Perfect for 3d printing, no?",
+      "Low poly smoothed male figure, designed with blender and smoothed with zbrush. Perfect for 3d printing, no?",
     file: "Male.gltf",
   },
   {
