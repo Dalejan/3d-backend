@@ -17,7 +17,7 @@ app.use("/graphql", bodyParser.json(), graphqlExpress({ schema }));
 // GraphiQL, a visual editor for queries
 app.use("/graphiql", graphiqlExpress({ endpointURL: "/graphql" }));
 
-// Serve static files
+// Serve static 3d files
 app.use("/static", express.static("./assets"));
 
 // Start the server
