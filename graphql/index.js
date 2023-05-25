@@ -1,19 +1,21 @@
 const { MODELS_SCHEMA, MODELS_TYPES } = require("./schemas/models.schema");
-const { DATA_SCHEMA, DATA_TYPES } = require("./schemas/data.schema");
-const { makeExecutableSchema } = require("graphql-tools");
 
-const QUERY = `type Query { 
-                    models: [Model], 
-                    data: [Data] 
-                }`;
+var { buildSchema } = require("graphql");
 
-const typeDefs = [QUERY, MODELS_TYPES, DATA_TYPES];
-const resolvers = {
-  Query: { models: () => MODELS_SCHEMA, data: () => DATA_SCHEMA },
+// // Construct a schema, using GraphQL schema language
+var schema = buildSchema(`
+  ${MODELS_TYPES}
+
+  type Query {
+    models: [Model]
+  }
+`);
+
+// // The rootValue provides a resolver function for each API endpoint
+var rootValue = {
+  models: () => {
+    return MODELS_SCHEMA;
+  },
 };
 
-// Put together a schema
-module.exports = makeExecutableSchema({
-  typeDefs,
-  resolvers,
-});
+module.exports = { schema, rootValue };

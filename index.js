@@ -1,7 +1,6 @@
 const express = require("express");
-const bodyParser = require("body-parser");
-const { graphqlExpress, graphiqlExpress } = require("apollo-server-express");
-const schema = require("./graphql/index");
+var { graphqlHTTP } = require("express-graphql");
+const { schema, rootValue } = require("./graphql/index");
 
 // Initialize the app
 const app = express();
@@ -12,10 +11,15 @@ const PORT = process.env.PORT || 8080;
 app.use(cors());
 
 // The GraphQL endpoint
-app.use("/graphql", bodyParser.json(), graphqlExpress({ schema }));
 
-// GraphiQL, a visual editor for queries
-app.use("/graphiql", graphiqlExpress({ endpointURL: "/graphql" }));
+app.use(
+  "/graphql",
+  graphqlHTTP({
+    schema: schema,
+    rootValue: rootValue,
+    graphiql: true,
+  })
+);
 
 // Serve static 3d files
 app.use("/static", express.static("./assets"));
