@@ -1,5 +1,6 @@
 const express = require("express");
 var { graphqlHTTP } = require("express-graphql");
+const path = require("path");
 const { schema, rootValue } = require("./graphql/index");
 
 // Initialize the app
@@ -21,12 +22,11 @@ app.use(
   })
 );
 
-// Serve static 3d files
-app.use("/static", express.static("./assets"));
+app.use("/public", express.static(__dirname + "/public/"));
 
 // Start the server
 var server = app.listen(PORT, () => {
   console.log(
-    `Go to http://${server.address().address}:${PORT}/graphiql to run queries!`
+    `Go to http://${server.address().address}:${PORT}/graphql to run queries!`
   );
 });
