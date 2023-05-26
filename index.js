@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 8080;
 
 app.use(cors());
 
-// The GraphQL endpoint
+// The GraphQL cool endpoint
 
 app.use(
   "/graphql",
@@ -22,7 +22,7 @@ app.use(
   })
 );
 
-app.use("/public", express.static(__dirname + "/public/"));
+app.use("/public", express.static(path.join(__dirname, "public")));
 
 // Start the server
 var server = app.listen(PORT, () => {
